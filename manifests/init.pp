@@ -25,8 +25,8 @@
 #
 class tomcat {
   require tomcat::params
-  include tomcat::yumrepo
+  include tomcat::repo
   include tomcat::packages
 
-  Class['tomcat::yumrepo'] -> Class['tomcat::packages']
+  Class['tomcat::repo'] -> Class['tomcat::packages']
 }

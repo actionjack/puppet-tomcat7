@@ -13,6 +13,7 @@ class tomcat::repo {
     descr    => 'EE test repo',
     baseurl  => "${tomcat::params::eeyumrepopath}",
     enabled  => "${tomcat::params::eeyumrepoenabled}",
+    gpgcheck => '0',
     priority => '5',
   }
 }

@@ -1,26 +1,32 @@
-# = Class: tomcat7
+# = Class: tomcat
 #
-# This class installs and configures the tomcat7 service.
+# This class installs and configures the tomcat service.
 #
 # == Parameters:
 #
 # Check params.pp to configure
 #
 # == Actions:
-#   Installs and configures the tomcat7 service.
+#   Installs and configures the tomcat service.
 #
 # == Requires:
-#   - Package["tomcat7"] in your local repo
+#   - Package["tomcat"] in your local repo
 #   - Package["java>=1.7.0"] in your local repo
 #
 # == Sample Usage:
 #
 # site.pp:
-#    import "tomcat7" (optional since it's in autoload format)
+#    import "tomcat" (optional since it's in autoload format)
 #
 # nodes.pp:
-#    class tomcat7server{
-#        include tomcat7
+#    class tomcatserver{
+#        include tomcat
 #    }
 #
-class tomcat7 {}
+class tomcat {
+  require tomcat::params
+  include tomcat::yumrepo
+  include tomcat::packages
+
+  Class['tomcat::yumrepo'] -> Class['tomcat::packages']
+}

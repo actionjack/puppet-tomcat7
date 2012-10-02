@@ -1,6 +1,6 @@
 # = tomcat::params
 class tomcat::params {
-  $eeyumrepopath = 'http://ip-10-242-61-184.ec2.internal/repo/equalexperts'
+  $jreyumrepopath = 'http://ip-10-227-94-135.eu-west-1.compute.internal/repo/'
   if $virtual == 'virtualbox' {
     $eeyumrepoenabled = '0'
   } else {

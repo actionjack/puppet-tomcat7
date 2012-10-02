@@ -9,10 +9,10 @@ class tomcat::repo {
     mirrorlist     => 'http://www.jpackage.org/mirrorlist.php?dist=generic&type=free&release=6.0',
     priority       => '10',
   }
-  yumrepo {'equalexperts':
-    descr    => 'EE test repo',
-    baseurl  => "${tomcat::params::eeyumrepopath}",
-    enabled  => "${tomcat::params::eeyumrepoenabled}",
+  yumrepo {'jre':
+    descr    => 'jre repo',
+    baseurl  => "${tomcat::params::jreyumrepopath}",
+    enabled  => "${tomcat::params::jreyumrepoenabled}",
     gpgcheck => '0',
     priority => '5',
   }

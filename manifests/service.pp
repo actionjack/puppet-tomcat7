@@ -13,4 +13,10 @@ class tomcat::service {
     path    => '/bin:/usr/sbin',
     notify  => Service['tomcat7'],
   }
+  file{'/etc/sysconfig/tomcat7':
+    owner   => root,
+    group   => root,
+    content => template('tomcat/tomcat7.erb'),
+    notify  => Service['tomcat7'],
+  }
 }

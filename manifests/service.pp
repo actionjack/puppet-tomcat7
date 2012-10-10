@@ -6,4 +6,11 @@ class tomcat::service {
     hasstatus  => true,
     enable     => true,
   }
+  exec {'enable-oracle-jre':
+    unless  => 'alternatives --display java | egrep /usr/java',
+    command => 'alternatives --install /usr/bin/java java /usr/java/jre1.7.0_07/bin/java 2 &&
+                alternatives --set java /usr/java/jre1.7.0_07/bin/java',
+    path    => '/bin:/usr/sbin',
+    notify  => Service['tomcat7'],
+  }
 }

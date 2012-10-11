@@ -1,5 +1,10 @@
 # tomcat::service
 class tomcat::service {
+
+  $appenvvar    = hiera('appenvvar')
+  $appenvvarval = hiera('appenvvarval')
+  $appjavaopts  = hiera('appjavaopts')
+
   service { 'tomcat7':
     ensure     => 'running',
     hasrestart => true,

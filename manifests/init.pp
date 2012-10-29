@@ -23,8 +23,7 @@
 #        include tomcat
 #    }
 #
-class tomcat {
-  require tomcat::params
+class tomcat inherits tomcat::params {
   include tomcat::packages
   include tomcat::service
 

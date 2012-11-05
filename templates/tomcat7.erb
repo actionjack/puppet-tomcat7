@@ -1,2 +1,5 @@
-JAVA_OPTS="<%= appjavaopts %>"
-<%= appenvvar %>="<%= appenvvarval %>"
+<% if @tomcatvalues %>
+<% tomcatvalues.each do |value| %>
+<%= value %>
+<% end %>
+<% end %>

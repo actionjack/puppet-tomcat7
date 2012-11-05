@@ -15,15 +15,14 @@
 #
 # == Sample Usage:
 #
-# site.pp:
-#    import "tomcat" (optional since it's in autoload format)
-#
 # nodes.pp:
-#    class tomcatserver{
-#        include tomcat
+#    class {'tomcat':
+#        tomcatvalues => "array of tomcat values"
 #    }
 #
-class tomcat inherits tomcat::params {
+class tomcat (
+  $tomcatvalues = undef
+) inherits tomcat::params {
   include tomcat::packages
   include tomcat::service
 

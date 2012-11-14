@@ -9,10 +9,15 @@ class tomcat::service {
     hasstatus  => true,
     enable     => true,
   }
-  file{'/etc/sysconfig/tomcat7':
+  File{
     owner   => root,
     group   => root,
-    content => template('tomcat/tomcat7.erb'),
     notify  => Service['tomcat7'],
+  }
+  file{'/etc/sysconfig/tomcat7':
+    content => template('tomcat/tomcat7.erb'),
+  }
+  file{'/etc/tomcat7/server.xml':
+    source => 'puppet:///modules/tomcat/etc/tomcat7/server.xml',
   }
 }

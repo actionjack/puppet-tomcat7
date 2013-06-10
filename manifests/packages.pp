@@ -1,7 +1,11 @@
 # = tomcat::packages
-class tomcat::packages {
-    $packagelist = ['tomcat7','jre']
-    package { $packagelist:
-      ensure => latest
-    }
+class tomcat::packages (
+  $version
+) {
+  package { 'tomcat7':
+    ensure => $version
+  }
+  package { 'jre':
+    ensure => 'installed'
+  }
 }

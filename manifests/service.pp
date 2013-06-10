@@ -1,7 +1,7 @@
 # tomcat::service
-class tomcat::service {
-
-  $tomcatvalues = $tomcat::tomcatvalues
+class tomcat::service (
+  $tomcatvalues
+) {
 
   service { 'tomcat7':
     ensure     => 'running',

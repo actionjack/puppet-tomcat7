@@ -4,7 +4,11 @@
 #
 # == Parameters:
 #
-# Check params.pp to configure
+# [*tomcatvalues*]
+#   Array of Tomcat values e.g. JAVA_HONE or CATALINA_BASE.
+#
+# [*version*]
+#   Version of Tomcat7 to install. The default is latest.
 #
 # == Actions:
 #   Installs and configures the tomcat service.
@@ -21,10 +25,16 @@
 #    }
 #
 class tomcat (
-  $tomcatvalues = undef
-) inherits tomcat::params {
-  include tomcat::packages
-  include tomcat::service
+  $tomcatvalues = undef,
+  $version = 'latest'
+) {
 
-  Class['tomcat::packages'] -> Class['tomcat::service']
+  validate_re($version, [ '^latest$', '^installed$', '^[0-9\-\.]+$' ])
+
+  class { 'tomcat::packages':
+      version => $version
+  } ->
+  class { 'tomcat::service':
+      tomcatvalues => $tomcatvalues
+  }
 }

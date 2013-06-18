@@ -29,8 +29,6 @@ class tomcat (
   $version = 'latest'
 ) {
 
-  validate_re($version, [ '^latest$', '^installed$', '^[0-9\-\.]+$' ])
-
   class { 'tomcat::packages':
       version => $version
   } ->

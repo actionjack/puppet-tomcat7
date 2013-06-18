@@ -23,7 +23,7 @@ describe 'tomcat', :type => :class do
     it { should contain_file('/etc/tomcat7/server.xml') }
   end
 
-  context 'Install Tomcat version 7.0.40' do
+  context 'Install Tomcat version 7.0.37-1.24.amzn1' do
     let :facts do
       {
           :osfamily => 'RedHat'
@@ -31,10 +31,10 @@ describe 'tomcat', :type => :class do
     end
     let :params do
       {
-          :version => '7.0.40'
+          :version => '7.0.37-1.24.amzn1'
       }
     end
-    it { should contain_package('tomcat7').with_ensure('7.0.40') }
+    it { should contain_package('tomcat7').with_ensure('7.0.37-1.24.amzn1') }
   end
 
 end

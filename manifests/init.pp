@@ -24,15 +24,41 @@
 #        tomcatvalues => "array of tomcat values"
 #    }
 #
+# == Todo:
+#
+#
+#
 class tomcat (
+  $tomcat_manager_username = undef,
+  $tomcat_manager_password = undef,
   $tomcatvalues = undef,
   $version = 'latest'
 ) {
 
-  class { 'tomcat::packages':
-      version => $version
-  } ->
-  class { 'tomcat::service':
-      tomcatvalues => $tomcatvalues
+  validate_re($version, 'present|installed|latest|^[._0-9a-zA-Z:-]+$')
+
+  package { 'tomcat7': ensure => $version }
+  package { 'jre': ensure => 'installed' }
+
+  service { 'tomcat7':
+    ensure     => 'running',
+    hasrestart => true,
+    hasstatus  => true,
+    enable     => true,
+  }
+
+  File{
+    owner   => root,
+    group   => root,
+    notify  => Service['tomcat7'],
+  }
+  file{ '/etc/sysconfig/tomcat7':
+    content => template('tomcat/tomcat7.erb'),
+  }
+  file{ '/etc/tomcat7/tomcat-users.xml':
+      content =>  template('tomcat/tomcat-users.xml.erb'),
+  }
+  file{ '/etc/tomcat7/server.xml':
+    source => 'puppet:///modules/tomcat/etc/tomcat7/server.xml',
   }
 }

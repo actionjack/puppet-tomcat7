@@ -20,7 +20,7 @@ describe 'tomcat', :type => :class do
                 )}
     it { should contain_file('/etc/sysconfig/tomcat7').with_content(/JAVA_HOME=".usr.java.default"/) }
     it { should contain_file('/etc/sysconfig/tomcat7').with_content(/CATALINA_OPTS="-Xms4096m -Xmx4096m -XX:PermSize=512m -XX:MaxPermSize=512m"/) }
-    it { should_not contain_file('/etc/tomcat7/server.xml').with_content(/tomcat-user\s>/) }
+    it { should_not contain_file('/etc/tomcat7/server.xml').with_content(/user\susername/) }
   end
 
   context 'Install Tomcat version 7.0.37-1.24.amzn1' do

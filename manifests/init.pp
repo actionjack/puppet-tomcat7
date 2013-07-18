@@ -29,6 +29,7 @@
 #
 #
 class tomcat (
+  $install_jre = true,
   $tomcat_manager_username = undef,
   $tomcat_manager_password = undef,
   $tomcatvalues = undef,
@@ -38,7 +39,9 @@ class tomcat (
   validate_re($version, 'present|installed|latest|^[._0-9a-zA-Z:-]+$')
 
   package { 'tomcat7': ensure => $version }
-  package { 'jre': ensure => 'installed' }
+  if $install_jre == true {
+    package { 'jre': ensure => 'installed' }
+  }
 
   service { 'tomcat7':
     ensure     => 'running',

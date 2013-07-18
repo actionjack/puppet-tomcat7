@@ -31,12 +31,14 @@ describe 'tomcat', :type => :class do
     end
     let :params do
       {
+          :install_jre => false,
           :version => '7.0.37-1.24.amzn1',
           :tomcat_manager_username => 'tom',
           :tomcat_manager_password => 'jerry',
       }
     end
     it { should contain_package('tomcat7').with_ensure('7.0.37-1.24.amzn1') }
+    it { should_not contain_package('jre')}
     it { should contain_file('/etc/tomcat7/tomcat-users.xml').with_content(/<user\susername="tom"\spassword="jerry"\sroles="manager-script,manager-gui"\/>/)}
   end
 

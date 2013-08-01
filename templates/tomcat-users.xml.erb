@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <tomcat-users>
 <% if @tomcat_manager_username and @tomcat_manager_password -%>
-  <user username="<%= tomcat_manager_username %>" password="<%= tomcat_manager_password %>" roles="manager-script,manager-gui"/>
+  <user username="<%= @tomcat_manager_username %>" password="<%= @tomcat_manager_password %>" roles="manager-script,manager-gui"/>
 <% end -%>
 </tomcat-users>
